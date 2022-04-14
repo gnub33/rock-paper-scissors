@@ -81,7 +81,6 @@ function game() {
     //let roundCounter = 1;
     let playerWins = 0;
     let computerWins = 0;
-    let tieCounter = 0;
     let outcome;
     for (let i = 0; i < 5; i++) {
         let playerSelection = prompt("Please type rock, paper, or scissors").toLowerCase(); // NEED to find a way for user to choose a different answer upon EACH round
@@ -101,7 +100,6 @@ function game() {
             computerWins++;
         } else {
             console.log("playerWin: " + playerWin);
-            tieCounter++;
         }
         console.log("player wins: " + playerWins + " computer wins: " + computerWins)
         //roundCounter ++;
