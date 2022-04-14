@@ -13,65 +13,65 @@ const computerPlay = () => {
     //Create function to randomly return rock/paper/scissors for computer
     //Create a variable that randomly stores 1,2 or 3
     //make a switch statement to select rock, paper or scissors depending on number generated
-    const num = Math.floor(Math.random()*3) + 1;
-    let computer = "";
+    const randomNumber = Math.floor(Math.random()*3) + 1;
+    let computerInput;
     //console.log(num)
-    switch(num) {
+    switch(randomNumber) {
         case 1:
-            computer = "rock";
+            computerInput = "rock";
             break;
         case 2:
-            computer = "paper";
+            computerInput = "paper";
             break;
         case 3:
-            computer = "scissors";
+            computerInput = "scissors";
             break;
         default:
             break;
     }
-    return computer;
+    return computerInput;
 }
 
 const playRound = (playerSelection, computerSelection) => {
-    //insert code here
     // use comparison operators to compare both arguments, then decide winner
-    let result;
     //const sunny = "sunny day hooray!";
 
     if(playerSelection === "rock") {
         if(computerSelection === "paper") {
-            result = "You Loose! Paper beats Rock"
-            playerWin = false;
+            console.log("You Loose! Paper beats Rock") //for the player local scope
+            playerWin = "no"; // for the code global scope
         } else if(computerSelection === "scissors") {
-            result = "You Win! Rock beats Scissors"
-            playerWin = true;
+            console.log("You Win! Rock beats Scissors")
+            playerWin = "yes";
         } else if(playerSelection === computerSelection) {
-            result = "This was a Tie"
-        } else {
-            result = "Please choose rock, paper or scissors"
+            console.log("This was a Tie") 
+            playerWin = "tie"
         }
-    }
-
-    if(playerSelection === "paper") {
+    } else if(playerSelection === "paper") {
         if(computerSelection ==="scissors") {
-            return "You Loose! Scissors beats Paper!"
+            console.log("You Loose! Scissors beats Paper") 
+            playerWin = "no"; 
         } else if(computerSelection === "rock") {
-            return "You Win! Paper beats Rock!"
-        } else {
-            return "This was a Tie"
+            console.log("You Win! Paper beats Rock")
+            playerWin = "yes";
+        } else if(playerSelection === computerSelection) {
+            console.log("This was a Tie") 
+            playerWin = "tie"
         }
-    }
-
-    if(playerSelection === "scissors") {
+    } else if(playerSelection === "scissors") {
         if(computerSelection ==="rock") {
-            return "You Loose! Rock beats Scissors"
+            console.log("You Loose! Rock beats Scissors") 
+            playerWin = "no"; 
         } else if(computerSelection === "paper") {
-            return "You Win! Scissors beats Paper!"
-        } else {
-            return "This was a Tie"
+            console.log("You Win! Scissors beats Paper")
+            playerWin = "yes";
+        } else if(playerSelection === computerSelection) {
+            console.log("This was a Tie") 
+            playerWin = "tie"
         }
+    } else {
+        console.log("That's not a valid response.")
     }
-    return result;
 }
 
 function game() {
@@ -84,18 +84,19 @@ function game() {
     let tieCounter = 0;
     let outcome;
     for (let i = 0; i < 5; i++) {
+        let playerSelection = prompt("Please type rock, paper, or scissors").toLowerCase(); // NEED to find a way for user to choose a different answer upon EACH round
         const computerSelection = computerPlay();
         playRound(playerSelection, computerSelection);
        // console.log(computerSelection);
-        console.log("player input is " + playerSelection)
-        console.log("computer input is " + computerSelection);
+        console.log("player input is " + playerSelection + " and " + "computer input is " + computerSelection)
+        console.log();
         //console.log(playRound(playerSelection,computerSelection))
         //console.log("Match is, You: " + playerSelection + " vs computer: " + computerSelection)
 
-        if(playerWin) {
+        if(playerWin == "yes") {
             console.log("playerWin: " + playerWin);
             playerWins++;
-        } else if(!playerWin) {
+        } else if(playerWin == "no") {
             console.log("playerWin: " + playerWin);
             computerWins++;
         } else {
@@ -118,9 +119,5 @@ function game() {
 }
 
 
-const playerSelection = "rock";
 let playerWin;
-//const computerSelection = computerPlay();
-//console.log("Match is, You: " + playerSelection + " vs computer: " + computerSelection)
-//console.log(playRound(playerSelection,computerSelection))
 console.log(game());
