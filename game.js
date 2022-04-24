@@ -33,18 +33,26 @@ const computerPlay = () => {
 }
 
 const playRound = (playerSelection, computerSelection) => {
+    let playerWin; // variable that holds single round result
+
     // use comparison operators to compare both arguments, then decide winner
     //const sunny = "sunny day hooray!";
 
     if(playerSelection === "rock") {
         if(computerSelection === "paper") {
-            console.log("You Loose! Paper beats Rock") //for the player local scope
+            const results = document.createElement('div');
+            results.textContent = "You Loose! Paper beats Rock";
+            container.appendChild(results);
             playerWin = "no"; // for the code global scope
         } else if(computerSelection === "scissors") {
-            console.log("You Win! Rock beats Scissors")
+            const results = document.createElement('div');
+            results.textContent = "You Win! Rock beats Scissors";
+            container.appendChild(results);
             playerWin = "yes";
         } else if(playerSelection === computerSelection) {
-            console.log("This was a Tie") 
+            const results = document.createElement('div');
+            results.textContent = "This was a Tie"; 
+            container.appendChild(results);
             playerWin = "tie"
         }
     } else if(playerSelection === "paper") {
@@ -74,48 +82,20 @@ const playRound = (playerSelection, computerSelection) => {
     }
 }
 
-function game() {
-    //five rounds
-    //keeps score
-    //declares winner at the end
-    //let roundCounter = 1;
-    let playerWins = 0;
-    let computerWins = 0;
-    let outcome;
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Please type rock, paper, or scissors").toLowerCase(); // NEED to find a way for user to choose a different answer upon EACH round
-        const computerSelection = computerPlay();
-        playRound(playerSelection, computerSelection);
-       // console.log(computerSelection);
-        console.log("player input is " + playerSelection + " and " + "computer input is " + computerSelection)
-        console.log();
-        //console.log(playRound(playerSelection,computerSelection))
-        //console.log("Match is, You: " + playerSelection + " vs computer: " + computerSelection)
 
-        if(playerWin == "yes") {
-            console.log("playerWin: " + playerWin);
-            playerWins++;
-        } else if(playerWin == "no") {
-            console.log("playerWin: " + playerWin);
-            computerWins++;
-        } else {
-            console.log("playerWin: " + playerWin);
-        }
-        console.log("player wins: " + playerWins + " computer wins: " + computerWins)
-        //roundCounter ++;
-    }
+//DOM area
+const container = document.querySelector('#container');
+const buttons = document.querySelectorAll('button');
 
-    if(playerWins > computerWins) {
-        outcome = "You Win the Game!!!"
-    } else if(playerWins < computerWins) {
-        outcome = "Sorry you lost..."
-    } else {
-        outcome = "The Ultimate Tie"
-    }
-    return outcome;
-
-}
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    playRound(button.id,computerPlay());
+    //create another function that returns results string
+  });
+});
 
 
-let playerWin;
-console.log(game());
+
+
+
+//console.log(playRound());
