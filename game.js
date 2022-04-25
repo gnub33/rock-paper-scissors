@@ -34,48 +34,52 @@ const computerPlay = () => {
 
 const playRound = (playerSelection, computerSelection) => {
     let playerWin; // variable that holds single round result
+    const results = document.createElement('div'); //creates a new div to hold round result
 
     // use comparison operators to compare both arguments, then decide winner
     //const sunny = "sunny day hooray!";
 
-    if(playerSelection === "rock") {
+    if(playerSelection === "rock") { 
         if(computerSelection === "paper") {
-            const results = document.createElement('div');
-            results.textContent = "You Loose! Paper beats Rock";
-            container.appendChild(results);
+            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Loose! Paper beats Rock`; //creates text inside div
+            container.appendChild(results); // ads div to browser
             playerWin = "no"; // for the code global scope
         } else if(computerSelection === "scissors") {
-            const results = document.createElement('div');
-            results.textContent = "You Win! Rock beats Scissors";
+            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Win! Rock beats Scissors`;
             container.appendChild(results);
             playerWin = "yes";
         } else if(playerSelection === computerSelection) {
-            const results = document.createElement('div');
-            results.textContent = "This was a Tie"; 
+            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. This was a tie`; 
             container.appendChild(results);
             playerWin = "tie"
         }
     } else if(playerSelection === "paper") {
         if(computerSelection ==="scissors") {
-            console.log("You Loose! Scissors beats Paper") 
+            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Loose! Scissors beats Paper`; 
+            container.appendChild(results);
             playerWin = "no"; 
         } else if(computerSelection === "rock") {
-            console.log("You Win! Paper beats Rock")
+            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Win! Paper beats Rock`;
+            container.appendChild(results)
             playerWin = "yes";
         } else if(playerSelection === computerSelection) {
-            console.log("This was a Tie") 
+            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. This was a Tie`; 
+            container.appendChild(results)
             playerWin = "tie"
         }
     } else if(playerSelection === "scissors") {
         if(computerSelection ==="rock") {
-            console.log("You Loose! Rock beats Scissors") 
+            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Loose! Rock beats Scissors`; 
+            container.appendChild(results)
             playerWin = "no"; 
         } else if(computerSelection === "paper") {
-            console.log("You Win! Scissors beats Paper")
+            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Win! Scissors beats Paper`;
+            container.appendChild(results)
             playerWin = "yes";
         } else if(playerSelection === computerSelection) {
-            console.log("This was a Tie") 
-            playerWin = "tie"
+            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. This was a tie`; 
+            container.appendChild(results);
+            playerWin = "tie";
         }
     } else {
         console.log("That's not a valid response.")
@@ -98,4 +102,4 @@ buttons.forEach((button) => {
 
 
 
-//console.log(playRound());
+console.log("hello \nthere big guy");
