@@ -37,23 +37,20 @@ function game() {
     let computerWins = 0;
     let outcome;
 
-    let playerSelection = prompt("Please type rock, paper, or scissors").toLowerCase(); // NEED to find a way for user to choose a different answer upon EACH round
-    const computerSelection = computerPlay();
+    //const computerSelection = computerPlay();
     playRound(playerSelection, computerSelection);
-   // console.log(computerSelection);
-    console.log("player input is " + playerSelection + " and " + "computer input is " + computerSelection)
-    console.log();
+    //console.log("player input is " + playerSelection + " and " + "computer input is " + computerSelection)
     //console.log(playRound(playerSelection,computerSelection))
     //console.log("Match is, You: " + playerSelection + " vs computer: " + computerSelection)
 
     if(playerWin == "yes") {
-        console.log("playerWin: " + playerWin);
+        //console.log("playerWin: " + playerWin);
         playerWins++;
     } else if(playerWin == "no") {
-        console.log("playerWin: " + playerWin);
+        //console.log("playerWin: " + playerWin);
         computerWins++;
     } else {
-        console.log("playerWin: " + playerWin);
+        //console.log("playerWin: " + playerWin);
     }
     console.log("player wins: " + playerWins + " computer wins: " + computerWins)
     //roundCounter ++;

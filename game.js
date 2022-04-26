@@ -32,9 +32,12 @@ const computerPlay = () => {
     return computerInput;
 }
 
+let playerWin;
+
 const playRound = (playerSelection, computerSelection) => {
-    let playerWin; // variable that holds single round result
+    //let playerWin; // variable that holds single round result
     const results = document.createElement('div'); //creates a new div to hold round result
+
 
     // use comparison operators to compare both arguments, then decide winner
     //const sunny = "sunny day hooray!";
@@ -44,6 +47,9 @@ const playRound = (playerSelection, computerSelection) => {
             results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Loose! Paper beats Rock`; //creates text inside div
             container.appendChild(results); // ads div to browser
             playerWin = "no"; // for the code global scope
+            //const subject = document.querySelector('.subject');
+            //var scoreP = 77;
+            //subject.insertAdjacentHTML('afterend', `${scoreP}`);
         } else if(computerSelection === "scissors") {
             results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Win! Rock beats Scissors`;
             container.appendChild(results);
@@ -86,6 +92,61 @@ const playRound = (playerSelection, computerSelection) => {
     }
 }
 
+//the game function
+let playerWins = 0;
+let computerWins = 0;
+let outcome = 'balloon';
+
+function game() {
+    //five rounds
+    //keeps score
+    //declares winner at the end
+
+    //let playerWins = 0;
+    //let computerWins = 0;
+    //let outcome;
+
+    const psco = document.querySelector('.player')
+    const csco = document.querySelector('.computer')
+
+    
+    //playRound(button.id, computerPlay());
+    //console.log("player input is " + playerSelection + " and " + "computer input is " + computerSelection)
+    //console.log(playRound(playerSelection,computerSelection))
+    //console.log("Match is, You: " + playerSelection + " vs computer: " + computerSelection)
+
+    if(playerWin == "yes") {
+        console.log("playerWin: " + playerWin);
+        playerWins++;
+    } else if(playerWin == "no") {
+        console.log("playerWin: " + playerWin);
+        computerWins++;
+    } else {
+        console.log("playerWin: " + playerWin);
+    }
+    console.log("player wins: " + playerWins + " computer wins: " + computerWins)
+    //roundCounter ++;
+
+    psco.textContent = `Player Score: ${playerWins}`;
+    csco.textContent = `Computer Score: ${computerWins}`;
+
+    const finalResult = document.createElement('div'); //creates a new div to hold final result
+
+
+    if(playerWins + computerWins >= 3) {
+        if(playerWins > computerWins) {
+            outcome = "You Win the Game!!!"
+        } else if(playerWins < computerWins) {
+            outcome = "Sorry you lost..."
+        } else {
+            outcome = "The Ultimate Tie"
+        }
+        console.log(outcome);
+        finalResult.textContent = `${outcome}`;
+        container.appendChild(finalResult);
+    }
+
+}
 
 //DOM area
 const container = document.querySelector('#container');
@@ -94,6 +155,7 @@ const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
     playRound(button.id,computerPlay());
+    game();
     //create another function that returns results string
   });
 });
@@ -101,5 +163,5 @@ buttons.forEach((button) => {
 
 
 
-
+console.log(outcome);
 console.log("hello \nthere big guy");

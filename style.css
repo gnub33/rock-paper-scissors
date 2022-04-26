@@ -1,3 +1,14 @@
 body {
-    background-color: tan;
+    background-color:rgb(36, 27, 67);
+    color: white;
+}
+
+.scores {
+    display: flex;
+    gap: 20px;
+}
+
+.score {
+    border: aqua solid 1px;
+    padding: 5px;
 }
