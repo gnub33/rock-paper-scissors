@@ -11,8 +11,6 @@ paper > rock */
 
 const computerPlay = () => { 
     //Create function to randomly return rock/paper/scissors for computer
-    //Create a variable that randomly stores 1,2 or 3
-    //make a switch statement to select rock, paper or scissors depending on number generated
     const randomNumber = Math.floor(Math.random()*3) + 1;
     let computerInput;
     //console.log(num)
@@ -32,58 +30,47 @@ const computerPlay = () => {
     return computerInput;
 }
 
-let playerWin;
-
 const playRound = (playerSelection, computerSelection) => {
-    //let playerWin; // variable that holds single round result
-    const results = document.createElement('div'); //creates a new div to hold round result
-
-
     // use comparison operators to compare both arguments, then decide winner
-    //const sunny = "sunny day hooray!";
-
     if(playerSelection === "rock") { 
         if(computerSelection === "paper") {
-            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Loose! Paper beats Rock`; //creates text inside div
+            results.textContent = `Player: ${playerSelection}, Computer: ${computerSelection}. You Loose! Paper beats Rock`; //creates text inside div
             container.appendChild(results); // ads div to browser
             playerWin = "no"; // for the code global scope
-            //const subject = document.querySelector('.subject');
-            //var scoreP = 77;
-            //subject.insertAdjacentHTML('afterend', `${scoreP}`);
         } else if(computerSelection === "scissors") {
-            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Win! Rock beats Scissors`;
+            results.textContent = `Player: ${playerSelection}, Computer: ${computerSelection}. You Win! Rock beats Scissors`;
             container.appendChild(results);
             playerWin = "yes";
         } else if(playerSelection === computerSelection) {
-            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. This was a tie`; 
+            results.textContent = `Player: ${playerSelection}, Computer: ${computerSelection}. This was a tie`; 
             container.appendChild(results);
             playerWin = "tie"
         }
     } else if(playerSelection === "paper") {
         if(computerSelection ==="scissors") {
-            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Loose! Scissors beats Paper`; 
+            results.textContent = `Player: ${playerSelection}, Computer: ${computerSelection}. You Loose! Scissors beats Paper`; 
             container.appendChild(results);
             playerWin = "no"; 
         } else if(computerSelection === "rock") {
-            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Win! Paper beats Rock`;
+            results.textContent = `Player: ${playerSelection}, Computer: ${computerSelection}. You Win! Paper beats Rock`;
             container.appendChild(results)
             playerWin = "yes";
         } else if(playerSelection === computerSelection) {
-            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. This was a Tie`; 
+            results.textContent = `Player: ${playerSelection}, Computer: ${computerSelection}. This was a Tie`; 
             container.appendChild(results)
             playerWin = "tie"
         }
     } else if(playerSelection === "scissors") {
         if(computerSelection ==="rock") {
-            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Loose! Rock beats Scissors`; 
+            results.textContent = `Player: ${playerSelection}, Computer: ${computerSelection}. You Loose! Rock beats Scissors`; 
             container.appendChild(results)
             playerWin = "no"; 
         } else if(computerSelection === "paper") {
-            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. You Win! Scissors beats Paper`;
+            results.textContent = `Player: ${playerSelection}, Computer: ${computerSelection}. You Win! Scissors beats Paper`;
             container.appendChild(results)
             playerWin = "yes";
         } else if(playerSelection === computerSelection) {
-            results.textContent = `Player: ${playerSelection} Computer: ${computerSelection}. This was a tie`; 
+            results.textContent = `Player: ${playerSelection}, Computer: ${computerSelection}. This was a tie`; 
             container.appendChild(results);
             playerWin = "tie";
         }
@@ -92,48 +79,26 @@ const playRound = (playerSelection, computerSelection) => {
     }
 }
 
-//the game function
-let playerWins = 0;
-let computerWins = 0;
-let outcome = 'balloon';
-
 function game() {
-    //five rounds
-    //keeps score
-    //declares winner at the end
-
-    //let playerWins = 0;
-    //let computerWins = 0;
-    //let outcome;
-
-    const psco = document.querySelector('.player')
-    const csco = document.querySelector('.computer')
-
-    
-    //playRound(button.id, computerPlay());
-    //console.log("player input is " + playerSelection + " and " + "computer input is " + computerSelection)
-    //console.log(playRound(playerSelection,computerSelection))
-    //console.log("Match is, You: " + playerSelection + " vs computer: " + computerSelection)
+    //declare a winner once one player reaches five points
 
     if(playerWin == "yes") {
-        console.log("playerWin: " + playerWin);
         playerWins++;
     } else if(playerWin == "no") {
-        console.log("playerWin: " + playerWin);
         computerWins++;
-    } else {
-        console.log("playerWin: " + playerWin);
-    }
-    console.log("player wins: " + playerWins + " computer wins: " + computerWins)
-    //roundCounter ++;
-
+    } 
+    //targets scoreboard
     psco.textContent = `Player Score: ${playerWins}`;
     csco.textContent = `Computer Score: ${computerWins}`;
 
-    const finalResult = document.createElement('div'); //creates a new div to hold final result
-
-
-    if(playerWins + computerWins >= 3) {
+    //when a player achieves 5 wins
+    if(playerWins === 5 || computerWins === 5) {
+        //remove current button selection
+        buttons.forEach((button) => {
+            button.style.display = "none";
+        })
+        //erase results div
+        //display final results
         if(playerWins > computerWins) {
             outcome = "You Win the Game!!!"
         } else if(playerWins < computerWins) {
@@ -141,27 +106,61 @@ function game() {
         } else {
             outcome = "The Ultimate Tie"
         }
-        console.log(outcome);
+        //console.log(outcome);
         finalResult.textContent = `${outcome}`;
         container.appendChild(finalResult);
+
+         //reveals play again button
+         playAgainBtn.style.display = "block";
     }
 
 }
 
-//DOM area
+///Global Variables///
+let playerWin;
+let playerWins = 0;
+let computerWins = 0;
+let outcome;
+
+///Global DOM area///
 const container = document.querySelector('#container');
 const buttons = document.querySelectorAll('button');
+//Creates play again button
+const playAgainBtn = document.createElement("button");
+playAgainBtn.innerHTML = "Play Again";
+container.appendChild(playAgainBtn);
+playAgainBtn.style.display = "none"; //hidden when game starts
+//targets scoreboard
+const psco = document.querySelector('.player')
+const csco = document.querySelector('.computer')
 
+//let playerWin; // variable that holds single round result
+const results = document.createElement('div'); //creates a new div to hold round result
+const finalResult = document.createElement('div'); //creates a new div to hold final result
+
+//code runs when rock,paper, or scissors button is clicked
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
     playRound(button.id,computerPlay());
     game();
-    //create another function that returns results string
   });
 });
 
+playAgainBtn.addEventListener('click', () => {
+    playAgainBtn.style.display = "none"; //hide again when clicked
 
+    //reset score
+    playerWins = 0;
+    computerWins = 0;
+    psco.textContent = `Player Score: ${playerWins}`;
+    csco.textContent = `Computer Score: ${computerWins}`;
 
+    //clear results log
+    results.remove();
+    finalResult.remove();
 
-console.log(outcome);
-console.log("hello \nthere big guy");
+    //bring back button selection
+    buttons.forEach((button) => {
+        button.style.display = "inline";
+    })
+})

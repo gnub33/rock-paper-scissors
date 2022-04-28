@@ -3,12 +3,14 @@ body {
     color: white;
 }
 
-.scores {
+#scores {
     display: flex;
     gap: 20px;
+
 }
 
 .score {
     border: aqua solid 1px;
+
     padding: 5px;
 }
